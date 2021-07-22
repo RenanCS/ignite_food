@@ -1,8 +1,8 @@
-import { MouseEventHandler } from "react";
+import { FoodItem } from "../../pages/Dashboard";
 
 export interface FoodProps {
-    food: any;
-    handleEditFood(food: any): void;
+    food: FoodItem;
+    handleEditFood(food: FoodItem): void;
     handleDelete(id: number): void;
   }
 

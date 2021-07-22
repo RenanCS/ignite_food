@@ -5,25 +5,33 @@ import ModalAddFood from '../../components/ModalAddFood';
 import ModalEditFood from '../../components/ModalEditFood';
 import api from '../../services/api';
 import { FoodsContainer } from './styles';
+export interface FoodItem {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  available: boolean;
+  image: string;
+}
 
 const Dashboard = () => {
-  const [foods, setFoods] = useState<any[]>([]);
-  const [editingFood, setEditingFood] = useState<any>({});
+  const [foods, setFoods] = useState<FoodItem[]>([]);
+  const [editingFood, setEditingFood] = useState<FoodItem>({} as FoodItem);
   const [modalOpen, setModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetcFoods() {
-      const response = await api.get('/foods');
+      const response = await api.get<FoodItem[]>('/foods');
       setFoods(response.data);
     }
     fetcFoods();
   }, []);
 
 
-  const handleAddFood = useCallback(async (food: any) => {
+  const handleAddFood = useCallback(async (food: FoodItem) => {
     try {
-      const response = await api.post('/foods', {
+      const response = await api.post<FoodItem[]>('/foods', {
         ...food,
         available: true,
       });
@@ -36,7 +44,7 @@ const Dashboard = () => {
 
 
 
-  const handleUpdateFood = useCallback(async (food: any) => {
+  const handleUpdateFood = useCallback(async (food: FoodItem) => {
 
     try {
       const foodUpdated = await api.put(
@@ -72,7 +80,7 @@ const Dashboard = () => {
   }, [editModalOpen])
 
 
-  const handleEditFood = useCallback((food: any) => {
+  const handleEditFood = useCallback((food: FoodItem) => {
     setEditModalOpen(true);
     setEditingFood(food);
   }, []);
@@ -101,7 +109,7 @@ const Dashboard = () => {
               key={food.id}
               food={food}
               handleDelete={handleDeleteFood}
-              handleEditFood={(food: any) => handleEditFood(food)}
+              handleEditFood={(food: FoodItem) => handleEditFood(food)}
             />
           ))}
       </FoodsContainer>
