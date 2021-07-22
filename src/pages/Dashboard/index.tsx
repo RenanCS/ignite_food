@@ -1,13 +1,11 @@
-import { Component, MouseEventHandler, useEffect } from 'react';
-
-import Header from '../../components/Header';
-import api from '../../services/api';
+import { useCallback, useEffect, useState } from 'react';
 import Food from '../../components/Food';
+import Header from '../../components/Header';
 import ModalAddFood from '../../components/ModalAddFood';
 import ModalEditFood from '../../components/ModalEditFood';
+import api from '../../services/api';
 import { FoodsContainer } from './styles';
-import { useState } from 'react';
-import { useCallback } from 'react';
+
 
 
 
