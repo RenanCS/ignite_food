@@ -6,9 +6,6 @@ import ModalEditFood from '../../components/ModalEditFood';
 import api from '../../services/api';
 import { FoodsContainer } from './styles';
 
-
-
-
 const Dashboard = () => {
   const [foods, setFoods] = useState<any[]>([]);
   const [editingFood, setEditingFood] = useState<any>({});
